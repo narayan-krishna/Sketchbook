@@ -1,4 +1,5 @@
 #include <iostream>
+#include <math.h>
 #include <vector>
 #include <unistd.h>
 #include <thread>
@@ -7,7 +8,7 @@
 
 using namespace std;
 
-#define THREAD_COUNT 4
+#define THREAD_COUNT 15 
 #define TIME_FRAME 16
 
 class Task {
@@ -58,7 +59,7 @@ bool start() {
 }
 
 void temp() {
-    cout << "rank " << rank << ": ready!" << endl;
+    cout << "rank " << rank << " has arrived" << endl;
 }
 
 };
@@ -70,7 +71,6 @@ public:
 
 struct ThreadTask{
     int period;
-    condition_variable *cv;
     mutex *m;
     thread *t;
 };
@@ -79,40 +79,44 @@ vector<ThreadTask> thread_tasks;
 
 int current_time_step = 0;
 mutex *main_m;
-condition_variable *main_cv;
+condition_variable main_cv;
+
+condition_variable thread_cv;
 
 RMS() {
     main_m = new mutex;
-    main_cv = new condition_variable;
+    add_thread_tasks();
     schedule_thread_tasks();
+    join_threads();
 }
 
 ~RMS() {
     for(auto &task : thread_tasks) {
         delete task.m;
-        delete task.cv;
         delete task.t;
         cout << "task thread deleted" << endl;
     }
     thread_tasks.resize(0);
 
     delete main_m;
-    delete main_cv;
     cout << "main tools deleted" << endl;
 }
 
 void add_thread_tasks() {
     for(int i = 0; i < THREAD_COUNT; i++) {
-        int period;
-        cout << "enter period" << endl;
-        cin >> period; 
+        int period = pow(2, i);
         thread_tasks.push_back(
             {   
                 period,
-                new condition_variable,
                 new mutex,
-                new thread([i, period](){ 
-                    Task t(i, period); 
+                new thread([&, i, period](){ 
+                    unique_lock<mutex> m_lock(*thread_tasks[i].m);
+                    thread_cv.wait(m_lock, [&] { 
+                        return (current_time_step == i + 1); 
+                    });
+
+                    cout << i + 1 << " processing" << endl;
+                    m_lock.unlock();
                 })
             }
         );
@@ -121,8 +125,10 @@ void add_thread_tasks() {
 
 void schedule_thread_tasks() {
     for(int time = 0; time < TIME_FRAME; time ++){
-        cout << "tick" << endl;
-        usleep(1);
+        current_time_step++;
+        cout << current_time_step << "s" << endl;
+        thread_cv.notify_all();
+        sleep(1);
     }
 }
 
