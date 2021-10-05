@@ -1,0 +1,11 @@
+total 160
+-rw-r--r-- 1 root      root             15731 Sep 15 23:06 alternatives.log
+drwxr-xr-x 2 root      root              4096 Oct  1 12:30 apt
+-rw-rw---- 1 root      utmp                 0 Aug 19 14:43 btmp
+drwxr-xr-x 2 root      root              4096 Aug  3 18:00 dist-upgrade
+-rw-r--r-- 1 root      root            118529 Oct  1 12:30 dpkg.log
+drwxr-sr-x 2 root      systemd-journal   4096 Aug 19 14:40 journal
+drwxr-xr-x 2 landscape landscape         4096 Sep 11 17:53 landscape
+-rw-rw-r-- 1 root      utmp            292292 Sep 11 16:11 lastlog
+drwxr-x--- 2 root      adm               4096 Jul 21  2020 unattended-upgrades
+-rw-rw-r-- 1 root      utmp                 0 Aug 19 14:43 wtmp

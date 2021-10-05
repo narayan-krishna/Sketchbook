@@ -1,0 +1,6 @@
+sample2.txt
+The
+quick
+brown
+fox
+sample2.txt	The	quick	brown	fox
