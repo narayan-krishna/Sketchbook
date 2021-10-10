@@ -18,8 +18,8 @@ namespace k_timers
         ~timer_ms(){ cout << "deleted" << endl; };
 
         void start() { t1 = high_resolution_clock::now(); }
-        void stop() { t2 = high_resolution_clock::now(); } 
-    
+        void stop() { t2 = high_resolution_clock::now(); }
+
         void elapsed() {
             t_elapsed = t2 - t1;   
             cout << t_elapsed.count() << " ms" << endl;  
