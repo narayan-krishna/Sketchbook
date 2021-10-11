@@ -1,0 +1,5 @@
+finding the permutations of a string using recursion
+
+base case: the string is empty
+
+otherwise:

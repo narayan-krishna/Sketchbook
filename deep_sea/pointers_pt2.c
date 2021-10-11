@@ -8,19 +8,43 @@ char* allocp = allocbuf; //aka alloc pointer
 
 int string_length(char *s);
 
-char* alloc(int n);
-void afree(char* p);
-void print();
+// char* alloc(int n);
+// void afree(char* p);
+// void print();
 
 int main (){
 
+    int *bufp;
+
+    char *in_text = "provid input";
+    printf("%s\n", in_text);
+    int buf_size = getchar() - '0';
+    printf("%d\n", buf_size);
+
+    int buf[buf_size];
+    buf[buf_size - 1] = '\0';
+    bufp = buf; //set this pointer to the head of buf
+
+    int count = 0;
+    while(*bufp != '\0') {
+        *bufp = count;        
+        bufp ++;
+        count++;
+    }
+
+    for(int i = 0; i < buf_size; i++) {
+        printf("%d", buf[i]);
+    }
+
+    printf("\n");
+
     //char *str = "hello";
-    int alloc_bits = 10;
-    alloc(alloc_bits);
-    print();
-    char *x = allocbuf + 5;
-    afree(x);
-    print();
+    // int alloc_bits = 20;
+    // alloc(alloc_bits);
+    // print();
+    // char *x = allocbuf + 9;
+    // afree(x);
+    // print();
 
     //printf("%d\n", string_length(str));
     return 0;
