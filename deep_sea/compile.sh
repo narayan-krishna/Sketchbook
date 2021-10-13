@@ -1,2 +1,2 @@
-gcc pointers_pt2.c
-valgrind --tool=memcheck ./a.out
+gcc stack_alloc.c -lm
+valgrind --tool=memcheck ./a.out 50
