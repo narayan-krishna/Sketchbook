@@ -1,6 +1,8 @@
 #include <stdio.h>
 #define MAXLINE 1000
 
+//hello
+
 int get_line(char line[], int max);
 int strindex(char source[], char searchfor[]);
 

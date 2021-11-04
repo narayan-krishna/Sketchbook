@@ -1,6 +1,8 @@
 #include <stdio.h>
 #define ALLOCSIZE 50
 
+/*hello my name jeff*/
+
 /*create a buffer*/
 char allocbuf[ALLOCSIZE];
 /*set the free position pointer to the first position of allocbuf*/
@@ -14,7 +16,7 @@ int string_length(char *s);
 
 int main (){
 
-    int *bufp;
+    int *bufp; 
 
     char *in_text = "provid input";
     printf("%s\n", in_text);
